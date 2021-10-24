@@ -1,6 +1,8 @@
 import csv
 
 from django.core.management.base import BaseCommand
+from django.template.defaultfilters import slugify
+
 from phones.models import Phone
 
 
@@ -12,14 +14,26 @@ class Command(BaseCommand):
         with open('phones.csv', 'r') as file:
             phones = list(csv.DictReader(file, delimiter=';'))
 
+
         for line in phones:
-            phone=Phone()
-            self.name = line[1]
-            self.image = line[2]
-            self.price = line[3]
-            self.release_date=line[4]
-            self.lte_exists=line[5]
-            phone.save()
-            
+            try:
+
+                name = line['name']
+                image = line['image']
+                price = line['price']
+                release_date=line['release_date']
+                lte_exists=line['lte_exists']
+                phone = Phone.objects.create(name=name,slug=slugify(name),
+                    image=image,
+                    price=price,
+                    release_date=release_date,
+                    lte_exists=lte_exists)
+                phone.save()
+            except:
+                continue
+
+
+
+
 
 

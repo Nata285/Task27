@@ -13,6 +13,11 @@
         </div>
 
         <div class="content">
+            <ul/>
+            {% for phone in phone_catalog%}
+            <li/> {{phone.name}}</li>
+            {%endfor%}
+            </ul>
             {# Здесь должен отображаться каталог с телефонами #}
         </div>
     </div>

@@ -5,17 +5,19 @@ from django.shortcuts import render
 
 from phones.models import Phone
 
+SORT_MAP = {
+    'name': 'name',
+    'max_price': '-price',
+    'min_price': 'price',
+}
 
 def show_catalog(request):
     template = 'catalog.html'
     phone_catalog=Phone.objects.all()
-    if request.GET.get('sort') == 'min_price':
-        phone_catalog = Phone.objects.all().order_by('price')
-    elif request.GET.get('sort') == 'max_price':
-        phone_catalog = Phone.objects.all().order_by('-price')
-    else:
-        # request.GET.get('sort') == 'name':
-        phone_catalog = Phone.objects.all().order_by('name')
+    sort = request.GET.get('sort')
+    if sort:
+        phone_catalog = phone_catalog.order_by(SORT_MAP[sort])
+
 
     context = {'phone_catalog':phone_catalog}
     return render(request, template, context)
@@ -23,8 +25,9 @@ def show_catalog(request):
 
 def show_product(request, slug):
     template = 'product.html'
+    info=Phone.objects.all()
+    phone_info=info.filter(slug = slug)
+    context = {'phone_info': phone_info}
 
-
-    context = {}
     return render(request, template, context)
 

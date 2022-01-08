@@ -2,19 +2,25 @@
 
 {% load static %}
 
-{% block title %}{{ phone.name }}{% endblock %}
+{% block title %}Каталог{% endblock %}
 
 {% block content %}
   <div class="container">
-  <div class="header">
+    <div class="header">
+      <h1>Телефон</h1>
+    </div>
 
-    <h1>{{ phone_info.name }}</h1>
-  </div>
 
-  <div class="content">
-    <img src="{{ phone_info.image }}" alt="{{ phone_info.name }}"/>
-    <div>Стоимость: {{ phone_info.price }} ₽</div>
-    <div>Дата выпуска: {{ phone_info.release_date }}</div>
-    <div>LTE: {{ phone_info.lte_exists|yesno:'есть,нет' }}</div>
+    <div class="content">
+
+        <div class="Phone">
+          <h3> {{ phone.name }}</h3>
+          <div>Стоимость: {{ phone.price }} ₽</div>
+          <div>Дата выпуска: {{ phone.release_date }}</div>
+          <div>LTE: {{ phone.lte_exists|yesno:'есть,нет' }}</div>
+          <img height="400" src="{{ phone.image }}" alt="{{ phone.name }}"/>
+        </div>
+
+    </div>
   </div>
 {% endblock %}

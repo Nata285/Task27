@@ -28,7 +28,7 @@ class Command(BaseCommand):
                     price=price,
                     release_date=release_date,
                     lte_exists=lte_exists)
-                phone.save()
+
             except:
                 continue
 

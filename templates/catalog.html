@@ -20,9 +20,12 @@
     <div class="content">
       {% for phone in phone_catalog %}
         <div class="Phone">
+
           <h3> <a href = '{{phone.slug}}'>{{ phone.name }}</a> </h3>
           <div class="price">Стоимость: {{ phone.price }} ₽</div>
           <img height="400" src="{{ phone.image }}" alt="{{ phone.name }}"/>
+
+
         </div>
       {% endfor %}
     </div>
